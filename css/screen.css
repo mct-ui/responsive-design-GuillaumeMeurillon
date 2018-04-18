@@ -11,13 +11,13 @@
 @font-face {
   font-family: "HK Grotesk Web";
   font-weight: 400;
-  src: url("../fonts/hkgrotesk-regular-webfont.woff2") format("woff2"), url("../fonts/hkgrotesk-light-webfont.woff") format("woff");
+  src: url("../fonts/hkgrotesk-regular-webfont.woff2") format("woff2"), url("../fonts/hkgrotesk-regular-webfont.woff") format("woff");
 }
 
 @font-face {
   font-family: "HK Grotesk Web";
   font-weight: 600;
-  src: url("../fonts/hkgrotesk-medium-webfont.woff2") format("woff2"), url("../fonts/hkgrotesk-medium-webfont-webfont.woff2"), format("woff");
+  src: url("../fonts/hkgrotesk-medium-webfont.woff2") format("woff2"), url("../fonts/hkgrotesk-medium-webfont.woff") format("woff");
 }
 
 /*------------------------------------*\
@@ -40,15 +40,15 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 20px;
     line-height: 1.6;
   }
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
 }
 
 /*
@@ -59,13 +59,13 @@ html {
  */
 
 ::-moz-selection {
-  background: #5051db;
+  background: #5051DB;
   color: white;
   text-shadow: none;
 }
 
 ::selection {
-  background: #5051db;
+  background: #5051DB;
   color: white;
   text-shadow: none;
 }
@@ -159,13 +159,12 @@ hr {
 }
 
 a {
-  color: #5051db;
+  color: #5051DB;
   transition: all .1s ease-in-out;
-  text-decoration: none;
 }
 
-a:hover, a:focus {
-  color: Crimson;
+a:visited, a:active, a:hover, a:focus {
+  color: #3E3EA8;
 }
 
 /*------------------------------------*\
@@ -184,7 +183,13 @@ a:hover, a:focus {
   padding: 24px 24px 0;
 }
 
-@media(min-width:768px) {
+/* size modifiers */
+
+.o-row--lg {
+  padding: 48px 24px 24px;
+}
+
+@media (min-width: 768px) {
   .o-row {
     padding-left: 48px;
     padding-right: 48px;
@@ -192,27 +197,6 @@ a:hover, a:focus {
   .o-row--md {
     padding-top: 48px;
     padding-bottom: 24px;
-  }
-  .o-row--lg {
-    padding-top: 72px;
-    padding-bottom: 48px;
-  }
-}
-
-/* size modifiers */
-
-.o-row--lg {
-  padding: 48px 24px 24px;
-}
-
-.o-row--neutral-x-light {
-  background-color: #F7F7FA;
-}
-
-@media (min-width: 768px) {
-  .o-row {
-    padding-left: 48px;
-    padding-right: 48px;
   }
   .o-row--lg {
     padding-top: 72px;
@@ -229,13 +213,8 @@ a:hover, a:focus {
 .o-container {
   margin-left: auto;
   margin-right: auto;
-  max-width: 70.5em;
-}
-
-@media (min-width: 768px) {
-  .o-container {
-    max-width: 56.4em;
-  }
+  max-width: 56.4em;
+  /* 56.4 * 20px = 1128px */
 }
 
 /*
@@ -276,7 +255,7 @@ a:hover, a:focus {
 }
 
 .o-layout--gutter-lg {
-  margin: 0 24px;
+  margin: 0 -24px;
 }
 
 .o-layout--gutter-lg>.o-layout__item {
@@ -356,25 +335,13 @@ a:hover, a:focus {
 }
 
 /*
-    Objects: List
-    ---
-    Small reusable object to remove default list styling from lists
-*/
-
-.o-list {
-  list-style: none;
-  padding: 0;
-}
-
-/*
     Objects: section
     ---
     Creates vertical whitespace between adjacent sections inside a row
 */
 
 .o-section {
-  margin-bottom: 72px;
-  overflow: auto;
+  overflow-x: hidden;
 }
 
 .o-section+.o-section {
@@ -393,58 +360,40 @@ a:hover, a:focus {
   }
 }
 
+/*
+    Objects: List
+    ---
+    Small reusable object to remove default list styling from lists
+*/
+
+.o-list {
+  list-style: none;
+  padding: 0;
+}
+
 /*------------------------------------*\
   #COMPONENTS
 \*------------------------------------*/
 
 /*
-    Component: Nav
+    Component: header
     ---
-    Main navigation of the site
+    Main header of the website
 */
 
-.c-nav {
-  font-size: 18px;
-  line-height: 24px;
+.c-header__nav {
+  display: none;
 }
 
-.c-nav__link {
-  text-decoration: none;
-  font-weight: 400;
-  padding: 8px 0;
-}
-
-.c-nav__link, .c-nav__item, .c-nav__item:visited, .c-nav__item:active {
-  color: #202024;
-}
-
-/* .c-nav--meta .c-nav__link, .c-nav__item, .c-nav__item:visited, .c-nav__item:active {
-  color: #6c6c75;
-} */
-
-.c-nav__link--meta, .c-nav__link--meta:visited, .c-nav__link--meta:active {
-  color: #6c6c75;
-}
-
-.c-nav__link:hover, .c-nav__item:focus {
-  color: #5051db;
-}
-
-@media (min-width: 768px) {
-  .c-nav__list {
+@media (min-width: 992px) {
+  .c-header {
     display: flex;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    margin-left: -16px;
-    margin-right: -16px;
+    justify-content: space-between;
+    align-items: center;
   }
-  .c-nav__item {
-    padding: 8px 16px;
+  .c-header__nav {
+    display: block;
   }
-}
-
-.c-nav--meta {
-  font-size: 16px;
 }
 
 /*
@@ -462,32 +411,107 @@ a:hover, a:focus {
 }
 
 @media (min-width: 768px) {
-  .c-logo__symbol {
+  .c-logo {
     height: 40px;
   }
 }
 
 /*
-    Component: header
+    Component: Nav
     ---
-    Main header of the website
+    Main navigation of the site
 */
 
-.c-header__nav {
-  display: none:
+.c-nav {
+  font-size: 18px;
+  line-height: 24px;
 }
 
-@media (min-width: 992px) {
-  .c-header {
+.c-nav--meta {
+  font-size: 16px;
+}
+
+.c-nav__link {
+  display: block;
+  text-decoration: none;
+  font-weight: 400;
+  padding: 8px 0;
+}
+
+.c-nav__link, .c-nav__link:visited, .c-nav__link:active {
+  color: #202024;
+}
+
+.c-nav__link--meta, .c-nav__link--meta:visited, .c-nav__link--meta:active {
+  color: #6C6C75;
+}
+
+.c-nav__link:hover, .c-nav__link:focus {
+  color: #5051db;
+}
+
+@media (min-width: 768px) {
+  .c-nav__list {
     display: flex;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    justify-content: space-between;
-    align-items: center;
+    margin-left: -16px;
+    margin-right: -16px;
   }
-  .c-header__nav {
-    display: block;
+  .c-nav__link {
+    padding: 8px 16px;
   }
+}
+
+/*
+    Component: CTA link
+    ---
+    Small cta link with custom animation
+*/
+
+.c-link-cta {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  padding: 4px 0;
+  transition: color .175s ease-in;
+}
+
+.c-link-cta, .c-link-cta:visited, .c-link-cta:active {
+  color: #7373F5;
+}
+
+.c-link-cta::after {
+  content: " and more";
+}
+
+.c-link-cta::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #7373F5;
+  transform: scaleX(0.5);
+  transform-origin: left;
+  transition-property: transform background-color;
+  transition-duration: .175s;
+  transition-timing-function: ease-in-out;
+}
+
+.c-link-cta:hover {
+  color: #3E3EA8;
+}
+
+.c-link-cta:hover::before {
+  transform: scaleX(1);
+  transition-property: transform background-color;
+  transition-duration: .175s;
+  transition-timing-function: ease-in;
+  background-color: #3E3EA8;
 }
 
 /*------------------------------------*\
@@ -731,6 +755,24 @@ a:hover, a:focus {
 
 .u-pt-clear {
   padding-top: 0 !important;
+}
+
+/*
+    Utilities: color
+    ---
+    Utility classes to put specific colors onto elements
+*/
+
+.u-color-primary-light {
+  color: #7373F5 !important;
+}
+
+.u-color-primary-base {
+  color: #5051DB !important;
+}
+
+.u-color-primary-dark {
+  color: #3E3EA8 !important;
 }
 
 /*------------------------------------*\
